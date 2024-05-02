@@ -1,6 +1,8 @@
 "use server";
 
 import prisma from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 const addPost = async (formData: FormData) => {
   const title = formData.get("title") as string;
@@ -17,7 +19,9 @@ const addPost = async (formData: FormData) => {
       },
     },
   });
+  revalidatePath("/");
   console.log(result);
+  redirect("/");
 };
 
 export default addPost;

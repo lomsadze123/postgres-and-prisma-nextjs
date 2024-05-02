@@ -1,29 +1,16 @@
-import prisma from "@/lib/prisma";
+import getPosts from "@/actions/getPost";
 import Post from "./components/Post";
 import Link from "next/link";
-
-const getPosts = async () => {
-  const post = await prisma.post.findMany({
-    where: { published: true },
-    include: {
-      author: {
-        select: {
-          name: true,
-        },
-      },
-    },
-  });
-  return post;
-};
 
 export default async function Home() {
   const posts = await getPosts();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>Feed</h1>
-      <Link href="/add-post">Add Post</Link>
-      {posts.map((post) => (
+    <main className="flex min-h-screen flex-col items-center text-white">
+      <Link href="/add-post" className="bg-blue-500 rounded-md p-2 mt-8">
+        Add Post
+      </Link>
+      {posts?.map((post) => (
         <Post
           key={post.id}
           id={post.id}
