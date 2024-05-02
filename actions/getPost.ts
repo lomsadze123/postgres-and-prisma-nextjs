@@ -3,17 +3,23 @@
 import prisma from "@/lib/prisma";
 
 const getPosts = async () => {
-  const post = await prisma.post.findMany({
-    where: { published: true },
-    include: {
-      author: {
-        select: {
-          name: true,
+  try {
+    const post = await prisma.post.findMany({
+      where: { published: true },
+      include: {
+        author: {
+          select: {
+            name: true,
+          },
         },
       },
-    },
-  });
-  return post;
+    });
+
+    return post;
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return [];
+  }
 };
 
 export default getPosts;
