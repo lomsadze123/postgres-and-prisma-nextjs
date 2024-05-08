@@ -2,13 +2,13 @@ import Link from "next/link";
 import DeleteButton from "./DeleteButton";
 import { PostTypes } from "@/types/types";
 
-const Post = ({ title, content, author, id, authorId }: PostTypes) => {
+const Post = ({ title, content, author, id }: PostTypes) => {
   return (
     <div className="border-2 text-center border-blue-600 w-full max-w-xs rounded-md p-4 mt-4 text-lg">
       <div className="flex items-center justify-between">
         <Link href={`/add-post/${id}`}>✏️</Link>
         <h4 className="font-bold">{title}</h4>
-        <DeleteButton id={id} authorId={authorId ?? ""} />
+        <DeleteButton id={id} />
       </div>
       <a
         className="my-4 block text-blue-500 hover:text-blue-700 font-semibold"

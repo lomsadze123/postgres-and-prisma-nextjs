@@ -3,9 +3,12 @@
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
-const editPost = async (postId: string, formData: FormData) => {
+const editPost = async (
+  postId: string,
+  formData: FormData,
+  username: string
+) => {
   try {
-    const username = (formData.get("username") as string).trim();
     const title = (formData.get("title") as string).trim();
     const content = (formData.get("content") as string).trim();
 

@@ -1,15 +1,13 @@
-import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { z } from "zod";
 
-const useRegister = () => {
-  const [info, setInfo] = useState({ username: "", email: "", password: "" });
+const useLogin = () => {
+  const [info, setInfo] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const schema = z.object({
-    username: z.string().min(1),
     email: z.string().email("Invalid email format").min(1),
     password: z.string().min(1),
   });
@@ -22,6 +20,7 @@ const useRegister = () => {
     e.preventDefault();
     try {
       setLoading(true);
+
       const validationResult = schema.safeParse(info);
       if (validationResult.success === false) {
         setError(validationResult.error.errors[0].message);
@@ -29,24 +28,25 @@ const useRegister = () => {
         return;
       }
 
-      const res = await fetch("api/user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(info),
+      const res = await signIn("credentials", {
+        email: info.email,
+        password: info.password,
+        redirect: false,
       });
-      if (res.ok) {
-        setInfo({ username: "", email: "", password: "" });
-        setError("");
-        router.replace("/sign-in");
-        router.refresh();
-      } else {
-        setError("Something went wrong");
+
+      if (res?.error) {
+        setError("Invalid credentials");
         setLoading(false);
+        return;
       }
+
+      window.location.replace("/musics");
     } catch (error) {
-      setError("An error occurred");
+      setError(
+        error instanceof z.ZodError
+          ? error.errors[0].message
+          : "An error occurred"
+      );
       setLoading(false);
     }
   };
@@ -54,4 +54,4 @@ const useRegister = () => {
   return { handleInput, handleSubmit, info, error, loading };
 };
 
-export default useRegister;
+export default useLogin;

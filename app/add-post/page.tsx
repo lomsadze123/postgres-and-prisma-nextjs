@@ -16,10 +16,7 @@ const AddPost = async () => {
       ) : (
         <h1 className="text-3xl font-bold text-white text-center mt-20">
           You are not signed in. Get back to Sign In Page
-          <Link
-            className="text-blue-600 hover:text-blue-400"
-            href="/api/auth/signin"
-          >
+          <Link className="text-blue-600 hover:text-blue-400" href="/sign-in">
             {" "}
             (Click here)
           </Link>

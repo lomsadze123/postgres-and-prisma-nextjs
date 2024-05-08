@@ -3,7 +3,7 @@
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
-const deletePost = async (id: string, authorId: string) => {
+const deletePost = async (id: string) => {
   try {
     const existPost = await prisma.post.findUnique({
       where: {
@@ -18,12 +18,6 @@ const deletePost = async (id: string, authorId: string) => {
       console.error("Post not found");
       return;
     }
-
-    await prisma.user.delete({
-      where: {
-        id: authorId,
-      },
-    });
 
     const deletedPost = await prisma.post.delete({
       where: {

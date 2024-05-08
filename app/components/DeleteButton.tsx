@@ -2,15 +2,14 @@
 
 import { useState } from "react";
 import deletePost from "@/actions/deletePost";
-import { TypesForDelete } from "@/types/types";
 
-const DeleteButton = ({ id, authorId }: TypesForDelete) => {
+const DeleteButton = ({ id }: { id: string }) => {
   const [isPending, setIsPending] = useState(false);
 
   const handleDelete = async () => {
     setIsPending(true);
     try {
-      await deletePost(id, authorId);
+      await deletePost(id);
     } catch (error) {
       console.error("Error occurred while deleting:", error);
     } finally {

@@ -15,7 +15,7 @@ export default function Home() {
         </Link>
         <Link
           className="bg-gray-500 hover:bg-gray-600 px-4 py-2 rounded"
-          href="/api/auth/signin"
+          href="/sign-in"
         >
           Sign in
         </Link>

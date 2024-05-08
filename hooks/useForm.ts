@@ -12,7 +12,9 @@ const useForm = () => {
   const addPostWithReset = async (formData: FormData, username: string) => {
     setPending(true);
     try {
-      id ? await editPost(id, formData) : await addPost(formData, username);
+      id
+        ? await editPost(id, formData, username)
+        : await addPost(formData, username);
       router.replace("/musics");
     } catch (error) {
       console.error("Error occurred:", error);

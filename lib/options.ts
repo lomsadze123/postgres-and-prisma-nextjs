@@ -9,16 +9,19 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
+  pages: {
+    signIn: "/sign-in",
+  },
   providers: [
     CredentialsProvider({
       name: "Credentials",
       credentials: {
         email: {
-          label: "Email",
+          label: "email",
           type: "email",
           placeholder: "Enter email...",
         },
-        password: { label: "Password", type: "password" },
+        password: { label: "password", type: "password" },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials.password) {
@@ -69,9 +72,6 @@ export const authOptions: NextAuthOptions = {
           username: token.username,
         },
       };
-    },
-    async redirect() {
-      return "/musics";
     },
   },
   secret: process.env.SECRET,
