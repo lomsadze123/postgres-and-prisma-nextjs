@@ -1,12 +1,12 @@
-# Next.js Blog
+# Next.js Blog with Authentication
 
-This is a simple blog application built using Next.js and Prisma. It allows users to create, edit, and view blog posts.
+This is a simple blog application built using Next.js, Prisma, and authentication with NextAuth. It allows users to create, edit, and view blog posts after signing up or logging in.
 
 ## Features
 
+- Authentication: Users can sign up, sign in, and sign out.
 - Create new blog posts with a title, content, and author name.
 - Edit existing blog posts.
-- View list of all published posts.
 - View individual post details.
 
 ## Getting Started
