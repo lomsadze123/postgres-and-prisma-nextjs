@@ -1,32 +1,24 @@
-import getPosts from "@/actions/getPost";
-import Post from "./components/Post";
 import Link from "next/link";
 
-export default async function Home() {
-  const posts = await getPosts();
-
+export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center text-white">
-      <h1 className="my-8 text-xl text-center md:text-3xl">
-        Write some of your best musical compositions
+    <main className="flex flex-col items-center justify-center text-white mt-40 md:mt-60">
+      <h1 className="text-3xl md:text-5xl font-bold mb-12">
+        Sign in or Register
       </h1>
-      <Link
-        href="/add-post"
-        className="bg-blue-500 rounded-md p-2 mb-8 text-xl"
-      >
-        Add Music
-      </Link>
-      <div className="flex flex-wrap gap-8 w-full justify-evenly">
-        {posts?.map((post) => (
-          <Post
-            key={post.id}
-            id={post.id}
-            title={post.title}
-            content={post.content}
-            author={post.author?.name}
-            authorId={post.authorId}
-          />
-        ))}
+      <div className="flex space-x-4 tet-1xl md:text-2xl">
+        <Link
+          className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded"
+          href="/register"
+        >
+          Register
+        </Link>
+        <Link
+          className="bg-gray-500 hover:bg-gray-600 px-4 py-2 rounded"
+          href="/api/auth/signin"
+        >
+          Sign in
+        </Link>
       </div>
     </main>
   );

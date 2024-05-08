@@ -9,11 +9,11 @@ const useForm = () => {
   const router = useRouter();
   const [pending, setPending] = useState(false);
 
-  const addPostWithReset = async (formData: FormData) => {
+  const addPostWithReset = async (formData: FormData, username: string) => {
     setPending(true);
     try {
-      id ? await editPost(id, formData) : await addPost(formData);
-      router.replace("/");
+      id ? await editPost(id, formData) : await addPost(formData, username);
+      router.replace("/musics");
     } catch (error) {
       console.error("Error occurred:", error);
     } finally {

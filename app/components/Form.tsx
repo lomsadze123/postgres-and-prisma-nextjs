@@ -2,7 +2,7 @@
 
 import useForm from "@/hooks/useForm";
 
-const Form = () => {
+const Form = ({ username }: { username: string }) => {
   const { id, addPostWithReset, pending, router } = useForm();
 
   return (
@@ -12,24 +12,14 @@ const Form = () => {
         e.preventDefault();
         const formData = new FormData(e.target as HTMLFormElement);
 
-        if (
-          !formData.get("username") ||
-          !formData.get("title") ||
-          !formData.get("content")
-        ) {
+        if (!formData.get("title") || !formData.get("content")) {
           return;
         }
 
-        router.replace("/");
-        await addPostWithReset(formData);
+        router.replace("/musics");
+        await addPostWithReset(formData, username);
       }}
     >
-      <input
-        className="outline-none border-b-2 border-gray-400 py-2 px-4 w-full max-w-80 placeholder-gray-500 rounded-md"
-        type="text"
-        name="username"
-        placeholder="Write you username..."
-      />
       <input
         className="outline-none border-b-2 border-gray-400 py-2 px-4 w-full max-w-80 placeholder-gray-500 rounded-md"
         type="text"

@@ -24,13 +24,13 @@ const editPost = async (postId: string, formData: FormData) => {
     }
 
     // Update author name if it's changed
-    if (existingPost.author?.name !== username && existingPost.authorId) {
+    if (existingPost.author?.username !== username && existingPost.authorId) {
       await prisma.user.update({
         where: {
           id: existingPost.authorId,
         },
         data: {
-          name: username,
+          username,
         },
       });
     }

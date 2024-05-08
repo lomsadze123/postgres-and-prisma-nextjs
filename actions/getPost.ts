@@ -2,14 +2,18 @@
 
 import prisma from "@/lib/prisma";
 
-const getPosts = async () => {
+const getPosts = async (email: string) => {
   try {
     const post = await prisma.post.findMany({
-      where: { published: true },
+      where: {
+        author: {
+          email,
+        },
+      },
       include: {
         author: {
           select: {
-            name: true,
+            username: true,
           },
         },
       },
